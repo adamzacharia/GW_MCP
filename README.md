@@ -2,13 +2,31 @@
 
 An MCP (Model Context Protocol) server providing tools to query Gravitational Wave (GW) data from GraceDB and GWOSC.
 
-## ⚠️ Access Levels
+## What is MCP?
+
+MCP (Model Context Protocol) allows AI assistants like Claude to use external tools. This server gives Claude the ability to query gravitational wave databases in real-time, so you can ask questions about GW events in natural language.
+
+## Sample Questions
+
+Once connected, you can ask Claude questions like:
+
+- "What was the GPS time of GW150914?"
+- "Show me all events in the GWTC-3 catalog"
+- "Get strain data from the Hanford detector around GW150914"
+- "Search for gravitational wave events with FAR less than 1e-10"
+- "What files are available for a specific GraceDB event?"
+
+### Example
+
+<img width="1012" height="703" alt="Screenshot 2026-01-05 203324" src="https://github.com/user-attachments/assets/7fd8c9ed-8a7f-49ac-a5de-afc642feec89" />
+
+## Access Levels
 
 | Source | Public Access | Authenticated Access |
 |--------|--------------|---------------------|
-| **GWOSC** | ✅ Full (strain data, catalogs) | N/A |
-| **GraceDB** | ✅ Released events only | Full access to current observing run |
-| **GCN Kafka** | ❌ | Requires NASA Earthdata credentials |
+| **GWOSC** | Full (strain data, catalogs) | N/A |
+| **GraceDB** | Released events only | Full access to current observing run |
+| **GCN Kafka** | No | Requires NASA Earthdata credentials |
 
 **This server works out-of-the-box with public data only.**
 
@@ -48,20 +66,24 @@ python -c "from gwosc.datasets import event_gps; print('GW150914 GPS:', event_gp
 
 Add to `claude_desktop_config.json`:
 
+Or create the file
+
 ```json
 {
   "mcpServers": {
-    "gw-data": {
+    "GW-Data": {
       "command": "C:/Users/Asus/anaconda3/envs/opticsGPT/python.exe",
-      "args": ["-m", "gw_mcp_server.server"],
-      "cwd": "C:/Users/Asus/Desktop/OpticsGPT/GW_MCP/src"
+      "args": ["C:/Users/Asus/Desktop/OpticsGPT/GW_MCP/server.py"]
     }
   }
 }
 ```
 
-> **Note**: Adjust the python path if your Anaconda is installed elsewhere.  
-> Find it with: `conda activate opticsGPT && where python`
+> **WARNING**: You must update the paths below to match your system. Change:
+> - The Python executable path to your conda environment location
+> - The server.py path to where you cloned this repository
+>
+> Find your Python path with: `conda activate opticsGPT && where python`
 
 ---
 
@@ -81,7 +103,7 @@ Add to `claude_desktop_config.json`:
 
 ---
 
-## 🔐 For LIGO/Virgo Collaboration Members
+## For LIGO/Virgo Collaboration Members
 
 If you have LIGO credentials, you can access real-time alerts from the current observing run.
 
