@@ -72,8 +72,8 @@ Or create the file
 {
   "mcpServers": {
     "GW-Data": {
-      "command": "C:/Users/Asus/anaconda3/envs/opticsGPT/python.exe",
-      "args": ["C:/Users/Asus/Desktop/OpticsGPT/GW_MCP/server.py"]
+      "command": "C:/Users/Asus/anaconda3/envs/mcp/python.exe",
+      "args": ["C:/Users/Asus/Desktop/GW_MCP/server.py"]
     }
   }
 }
@@ -83,7 +83,7 @@ Or create the file
 > - The Python executable path to your conda environment location
 > - The server.py path to where you cloned this repository
 >
-> Find your Python path with: `conda activate opticsGPT && where python`
+> Find your Python path with: `conda activate mcp && where python`
 
 ---
 
