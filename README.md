@@ -266,6 +266,19 @@ For full documentation: https://ligo-gracedb.readthedocs.io/en/latest/
 | **GraceDB** | https://gracedb.ligo.org | For current run |
 | **GCN** | https://gcn.nasa.gov | Yes (Earthdata) |
 
+## Citation
+
+If you use this software in your research, please cite:
+
+```bibtex
+@software{gw_mcp,
+  title={GW MCP Server: Gravitational Wave Data Access for AI Agents},
+  author={Adam Zacharia Anil},
+  year={2025},
+  url={https://github.com/adamzacharia/GW_MCP}
+}
+```
+
 ## License
 
 MIT
