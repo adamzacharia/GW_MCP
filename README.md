@@ -86,6 +86,57 @@ Or create the file
 > Find your Python path with: `conda activate mcp && where python`
 
 ---
+---
+
+## Using with Other LLMs and Frameworks
+
+### LangChain Integration
+
+You can use this MCP server with LangChain using the `langchain-mcp-adapters` package:
+
+```bash
+pip install langchain-mcp-adapters
+```
+
+```python
+from langchain_mcp_adapters.client import MCPClient
+from langchain_openai import ChatOpenAI
+
+# Connect to the MCP server
+client = MCPClient(
+    command="python",
+    args=["path/to/GW_MCP/server.py"]
+)
+
+# Get tools from MCP server
+tools = client.get_tools()
+
+# Use with any LangChain-compatible LLM
+llm = ChatOpenAI(model="gpt-4")
+llm_with_tools = llm.bind_tools(tools)
+```
+
+### Open Source LLMs
+
+For open source LLMs (Ollama, LMStudio, etc.), you can:
+
+1. **Use MCP-compatible clients**: Some open source projects like [MCP CLI](https://github.com/modelcontextprotocol/cli) support connecting MCP servers to local LLMs.
+
+2. **Direct function calling**: Import the service classes directly in your Python code:
+
+```python
+from services.gracedb_service import get_gracedb_service
+from services.gwosc_service import get_gwosc_service
+
+# Use services directly
+gwosc = get_gwosc_service()
+gps_time = gwosc.get_event_gps("GW150914")
+print(f"GPS time: {gps_time}")
+```
+
+3. **Build a REST API**: Wrap the services in a FastAPI/Flask server for any LLM that supports function calling via HTTP.
+
+---
 
 ## Available Tools
 
